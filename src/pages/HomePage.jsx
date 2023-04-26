@@ -1,7 +1,7 @@
 import React from 'react';
 import ContactList from '../components/ContactList';
 import SearchBar from '../components/SearchBar';
-import { deleteContact, getContacts } from '../utils/data';
+import { getContacts, deleteContact } from '../utils/api';
 import { useSearchParams } from 'react-router-dom';
 
 function HomePage() {
@@ -13,12 +13,23 @@ function HomePage() {
     setSearchParams({ search });
   };
 
-  const [contacts, setContacts] = React.useState(() => getContacts());
+  const [contacts, setContacts] = React.useState([]);
   const [keyword, setKeyword] = React.useState(search || '');
 
-  const onDeleteHandler = (id) => {
-    deleteContact(id);
-    setContacts(getContacts());
+  React.useEffect(() => {
+    getContactsFromAPI();
+  }, []);
+
+  const getContactsFromAPI = async () => {
+    const { error, data } = await getContacts();
+    if (!error) {
+      setContacts(data);
+    }
+  }
+
+  const onDeleteHandler = async (id) => {
+    await deleteContact(id);
+    getContactsFromAPI();
   };
 
   const onKeywordChangeHandler = (keyword) => {

@@ -18,6 +18,11 @@ function HomePage() {
 
   React.useEffect(() => {
     getContactsFromAPI();
+
+    return () => {
+      setKeyword('');
+      setContacts(null);
+    }
   }, []);
 
   const getContactsFromAPI = async () => {

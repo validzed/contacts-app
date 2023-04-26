@@ -18,6 +18,11 @@ function ContactApp() {
       }
       setInitializing(false);
     });
+
+    return () => {
+      setAuthedUser(null);
+      setInitializing(true);
+    }
   }, []);
 
   const onLoginSuccess = async ({ accessToken }) => {

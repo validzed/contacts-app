@@ -7,15 +7,11 @@ import LocaleContext from '../contexts/LocaleContext';
 
 function HomePage() {
   const [searchParams, setSearchParams] = useSearchParams();
-
-  const search = searchParams.get('search');
-
-  const changeSearchParams = (search) => {
-    setSearchParams({ search });
-  };
-
   const [contacts, setContacts] = React.useState([]);
-  const [keyword, setKeyword] = React.useState(search || '');
+  const [keyword, setKeyword] = React.useState(() => {
+    return searchParams.get('search') || ''
+  });
+
   const { locale } = React.useContext(LocaleContext);
 
   React.useEffect(() => {
@@ -41,10 +37,10 @@ function HomePage() {
 
   const onKeywordChangeHandler = (keyword) => {
     setKeyword(keyword);
-    changeSearchParams(keyword);
+    setSearchParams({ keyword });
   };
 
-  const filteredContacts = contacts.filter((contact) => {
+  const filteredContacts = contacts?.filter((contact) => {
     return contact.name.toLowerCase().includes(keyword.toLowerCase());
   });
 

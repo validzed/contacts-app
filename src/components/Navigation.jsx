@@ -2,11 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { FiHome, FiPlusCircle, FiLogOut } from 'react-icons/fi';
+import LocaleContext from '../contexts/LocaleContext';
 
 const Navigation = ({ logout, name }) => {
+  const { locale, toggleLocale } = React.useContext(LocaleContext);
+
   return (
     <nav className="navigation">
       <ul>
+        <li>
+          <button onClick={toggleLocale}>{locale === 'id' ? 'en' : 'id'}</button>
+        </li>
         <li>
           <Link to="/"><FiHome /></Link>
         </li>

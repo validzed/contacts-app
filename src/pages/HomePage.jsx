@@ -3,6 +3,7 @@ import ContactList from '../components/ContactList';
 import SearchBar from '../components/SearchBar';
 import { getContacts, deleteContact } from '../utils/api';
 import { useSearchParams } from 'react-router-dom';
+import LocaleContext from '../contexts/LocaleContext';
 
 function HomePage() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -15,6 +16,7 @@ function HomePage() {
 
   const [contacts, setContacts] = React.useState([]);
   const [keyword, setKeyword] = React.useState(search || '');
+  const { locale } = React.useContext(LocaleContext);
 
   React.useEffect(() => {
     getContactsFromAPI();
@@ -49,7 +51,7 @@ function HomePage() {
   return (
     <section>
       <SearchBar keyword={keyword} keywordChange={onKeywordChangeHandler} />
-      <h2>Daftar Kontak</h2>
+      <h2>{locale === 'id' ? 'Daftar Kontak' : 'Contact List'}</h2>
       <ContactList contacts={filteredContacts} onDelete={onDeleteHandler} />
     </section>
   );

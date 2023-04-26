@@ -1,17 +1,10 @@
 import React from 'react';
+import useInput from '../hooks/useInput';
 import PropTypes from 'prop-types';
 
 function LoginInput({ login }) {
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
-
-  const onEmailChangeHandler = ({ target }) => {
-    return setEmail(target.value);
-  };
-
-  const onPasswordChangeHandler = ({ target }) => {
-    return setPassword(target.value);
-  };
+  const [email, handleEmailChange] = useInput('');
+  const [password, handlePasswordChange] = useInput('');
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
@@ -20,12 +13,12 @@ function LoginInput({ login }) {
 
   return (
     <form onSubmit={onSubmitHandler} className="login-input">
-      <input type="email" placeholder="Email" value={email} onChange={onEmailChangeHandler} />
+      <input type="email" placeholder="Email" value={email} onChange={handleEmailChange} />
       <input
         type="password"
         placeholder="Password"
         value={password}
-        onChange={onPasswordChangeHandler}
+        onChange={handlePasswordChange}
       />
       <button>Masuk</button>
     </form>

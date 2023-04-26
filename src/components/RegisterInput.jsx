@@ -1,22 +1,11 @@
 import React from 'react';
+import useInput from '../hooks/useInput';
 import PropTypes from 'prop-types';
 
 function RegisterInput({ register }) {
-  const [name, setName] = React.useState('');
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
-
-  const onNameChange = ({ target }) => {
-    setName(target.value);
-  };
-
-  const onEmailChange = ({ target }) => {
-    setEmail(target.value);
-  };
-
-  const onPasswordChange = ({ target }) => {
-    setPassword(target.value);
-  };
+  const [name, handleNameChange] = useInput('');
+  const [email, handleEmailChange] = useInput('');
+  const [password, handlePasswordChange] = useInput('');
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
@@ -29,9 +18,9 @@ function RegisterInput({ register }) {
 
   return (
     <form onSubmit={onSubmitHandler} className="register-input">
-      <input type="text" placeholder="Nama" value={name} onChange={onNameChange} />
-      <input type="email" placeholder="Email" value={email} onChange={onEmailChange} />
-      <input type="password" placeholder="Password" value={password} onChange={onPasswordChange} />
+      <input type="text" placeholder="Nama" value={name} onChange={handleNameChange} />
+      <input type="email" placeholder="Email" value={email} onChange={handleEmailChange} />
+      <input type="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
       <button>Register</button>
     </form>
   );

@@ -12,14 +12,18 @@ function ContactApp() {
   const [authedUser, setAuthedUser] = React.useState(null);
   const [initializing, setInitializing] = React.useState(true);
   const [locale, setLocale] = React.useState(localStorage.getItem('locale') || 'id');
+  const firstRun = React.useRef(true);
 
   React.useEffect(() => {
-    getUserLogged().then(({ error, data }) => {
-      if (!error) {
-        setAuthedUser(data);
-      }
-      setInitializing(false);
-    });
+    if (firstRun.current) {
+      getUserLogged().then(({ error, data }) => {
+        if (!error) {
+          setAuthedUser(data);
+        }
+        setInitializing(false);
+      });
+      firstRun.current = false;
+    }
 
     return () => {
       setAuthedUser(null);
@@ -35,12 +39,10 @@ function ContactApp() {
     });
   };
 
-  const localeContextValue = React.useMemo(() => {
-    return {
-      locale,
-      toggleLocale,
-    };
-  }, [locale]);
+  const localeContextValue = React.useMemo(() => ({
+    locale,
+    toggleLocale,
+  }), [locale]);
 
   const onLoginSuccess = async ({ accessToken }) => {
     putAccessToken(accessToken);

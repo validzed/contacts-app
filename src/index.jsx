@@ -6,7 +6,9 @@ import './styles/style.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <BrowserRouter>
-    <ContactApp />
-  </BrowserRouter>
+  <React.StrictMode>
+    <BrowserRouter>
+      <ContactApp />
+    </BrowserRouter>
+  </React.StrictMode>,
 );

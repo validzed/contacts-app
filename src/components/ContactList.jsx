@@ -5,7 +5,7 @@ import ContactItem from './ContactItem';
 function ContactList({ contacts, onDelete }) {
   return (
     <div className="contact-list">
-      {contacts.map((contact) => (
+      {contacts?.map((contact) => (
         <ContactItem key={contact.id} id={contact.id} onDelete={onDelete} {...contact} />
       ))}
     </div>
@@ -13,6 +13,7 @@ function ContactList({ contacts, onDelete }) {
 }
 
 ContactList.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   contacts: PropTypes.arrayOf(PropTypes.object).isRequired,
   onDelete: PropTypes.func.isRequired,
 };

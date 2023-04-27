@@ -4,14 +4,14 @@ import { Link } from 'react-router-dom';
 import { FiHome, FiPlusCircle, FiLogOut } from 'react-icons/fi';
 import LocaleContext from '../contexts/LocaleContext';
 
-const Navigation = ({ logout, name }) => {
+function Navigation({ logout, name }) {
   const { locale, toggleLocale } = React.useContext(LocaleContext);
 
   return (
     <nav className="navigation">
       <ul>
         <li>
-          <button onClick={toggleLocale}>{locale === 'id' ? 'en' : 'id'}</button>
+          <button type="button" onClick={toggleLocale}>{locale === 'id' ? 'en' : 'id'}</button>
         </li>
         <li>
           <Link to="/"><FiHome /></Link>
@@ -20,12 +20,15 @@ const Navigation = ({ logout, name }) => {
           <Link to="/add"><FiPlusCircle /></Link>
         </li>
         <li>
-          <button onClick={logout}>{name} <FiLogOut /></button>
+          <button type="button" onClick={logout}>
+            {name}
+            <FiLogOut />
+          </button>
         </li>
       </ul>
     </nav>
   );
-};
+}
 
 Navigation.propTypes = {
   logout: PropTypes.func.isRequired,

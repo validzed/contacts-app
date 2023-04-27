@@ -6,9 +6,7 @@ function ContactInput({ addContact }) {
   const [tag, setTag] = React.useState('');
 
   const onNameChangeHandler = (event) => {
-    setName((prevName) => {
-      return event.target.value;
-    });
+    setName(() => event.target.value);
   };
 
   const onTagChangeHandler = (event) => {

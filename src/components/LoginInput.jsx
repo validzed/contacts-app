@@ -1,6 +1,6 @@
 import React from 'react';
-import useInput from '../hooks/useInput';
 import PropTypes from 'prop-types';
+import useInput from '../hooks/useInput';
 
 function LoginInput({ login }) {
   const [email, handleEmailChange] = useInput('');
@@ -20,7 +20,7 @@ function LoginInput({ login }) {
         value={password}
         onChange={handlePasswordChange}
       />
-      <button>Masuk</button>
+      <button type="submit">Masuk</button>
     </form>
   );
 }

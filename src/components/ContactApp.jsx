@@ -1,5 +1,6 @@
 import React from 'react';
 import ContactList from './ContactList';
+import ContactInput from './ContactInput';
 import { getData } from '../utils/data';
 
 function ContactApp() {
@@ -10,8 +11,23 @@ function ContactApp() {
     setContacts(contactResults);
   }
 
+  const onAddContactHandler = ({ name, tag }) => {
+    setContacts([
+      ...contacts,
+      {
+        id: +new Date(),
+        name,
+        tag,
+        imageUrl: '/images/default.jpg',
+      }
+    ]);
+  }
+
   return (
     <div className="contact-app">
+      <h1>Aplikasi Kontak</h1>
+      <h2>Tambah Kontak</h2>
+      <ContactInput addContact={onAddContactHandler} />
       <h1>Daftar Kontak</h1>
       <ContactList contacts={contacts} onDelete={onDeleteHandler} />
     </div>

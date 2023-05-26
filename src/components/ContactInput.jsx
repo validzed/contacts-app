@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function ContactInput({ addContact }) {
   const [name, setName] = React.useState('');
@@ -20,12 +21,22 @@ function ContactInput({ addContact }) {
   };
 
   return (
-    <form className='contact-input' onSubmit={onSubmitEventHandler}>
-      <input type="text" name="nama" placeholder="Nama" value={name} onChange={onNameChangeHandler} />
+    <form className="contact-input" onSubmit={onSubmitEventHandler}>
+      <input
+        type="text"
+        name="nama"
+        placeholder="Nama"
+        value={name}
+        onChange={onNameChangeHandler}
+      />
       <input type="text" name="tag" placeholder="Tag" value={tag} onChange={onTagChangeHandler} />
       <button type="submit">Tambah</button>
     </form>
   );
 }
+
+ContactInput.propTypes = {
+  addContact: PropTypes.func.isRequired,
+};
 
 export default ContactInput;
